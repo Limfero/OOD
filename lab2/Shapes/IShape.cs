@@ -1,4 +1,4 @@
-﻿namespace lab1.Shapes
+﻿namespace lab2.Shapes
 {
     public interface IShape
     {

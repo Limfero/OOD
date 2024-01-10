@@ -1,4 +1,4 @@
-﻿using lab1.Shapes;
+﻿using lab2.Shapes;
 
 namespace lab2.Shapes.Creators
 {

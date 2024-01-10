@@ -1,11 +1,11 @@
-using lab1.File;
-using lab1.Shapes;
+using lab2.File;
+using lab2.Shapes;
 
-namespace lab1
+namespace lab2
 {
     public partial class Form1 : Form
     {
-        private List<IShape> shapes;
+        private List<IShape> _shapes;
 
         private readonly string _textInFileDialog = "Text Files|*.txt";
         private readonly string _warningNoShapes = "No shapes loaded. Load shapes first.";
@@ -28,18 +28,18 @@ namespace lab1
             {
                 string filePath = openFileDialog.FileName;
                 FileProcessor fileProcessor = new();
-                shapes = fileProcessor.ReadShapes(filePath);
+                _shapes = fileProcessor.ReadShapes(filePath);
 
-                fileProcessor.WriteResults(shapes);
+                fileProcessor.WriteResults(_shapes);
             }
 
-            if (shapes != null)
+            if (_shapes != null)
             {
                 using Graphics graphics = CreateGraphics();
 
                 graphics.Clear(Color.White);
 
-                foreach (IShape shape in shapes)
+                foreach (IShape shape in _shapes)
                 {
                     shape.Draw(graphics);
                 }

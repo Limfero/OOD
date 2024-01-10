@@ -1,7 +1,7 @@
-﻿using lab1.Shapes;
+﻿using lab2.Shapes;
 using lab2.Shapes.Creators;
 
-namespace lab1.File
+namespace lab2.File
 {
     public class FileProcessor
     {
@@ -41,20 +41,14 @@ namespace lab1.File
 
         private IShapeCreator GetShapeCreator(string shapeType)
         {
-            switch (shapeType)
+            IShapeCreator? creator = shapeType switch
             {
-                case "TRIANGLE":
-                    return TriangleCreator.Instance;
-
-                case "RECTANGLE":
-                    return RectangleCreator.Instance;
-
-                case "CIRCLE":
-                    return CircleCreator.Instance;
-
-                default:
-                    return null;
-            }
+                "TRIANGLE" => TriangleCreator.Instance,
+                "RECTANGLE" => RectangleCreator.Instance,
+                "CIRCLE" => CircleCreator.Instance,
+                _ => null,
+            };
+            return creator;
         }
 
         public void WriteResults(List<IShape> shapes)
