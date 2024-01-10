@@ -24,7 +24,7 @@ namespace lab2.File
 
                     if (shapeCreator != null)
                     {
-                        IShape shape = shapeCreator.CreateShape(tokens[1]);
+                        IShape shape = new ShapeInfoDecorator(shapeCreator.CreateShape(tokens[1]));
                         shapes.Add(shape);
                     }
                     else Console.WriteLine($"Unknown shape type: {shapeType}");
@@ -61,9 +61,8 @@ namespace lab2.File
 
                 foreach (IShape shape in shapes)
                 {
-                    ShapeInfoDecorator shapeDecorator = new(shape);
-                    shapeDecorator.CalculatePerimeter();
-                    shapeDecorator.CalculateArea();
+                    shape.CalculatePerimeter();
+                    shape.CalculateArea();
                 }
             }
             catch (Exception ex)

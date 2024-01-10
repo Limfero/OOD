@@ -1,4 +1,5 @@
 ﻿using lab1.Shapes;
+using lab2.Shapes;
 
 namespace lab1.File
 {
@@ -58,7 +59,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new TriangleShape(points);
+            return new ShapeInfoDecorator(new TriangleShape(points));
         }
 
         private IShape ParseRectangle(string data)
@@ -72,7 +73,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new RectangleShape(points);
+            return new ShapeInfoDecorator(new RectangleShape(points));
         }
 
         private IShape ParseCircle(string data)
@@ -82,7 +83,7 @@ namespace lab1.File
             Point center = new(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             int radius = int.Parse(parameters[1].Split('=')[1]);
 
-            return new CircleShape(center, radius);
+            return new ShapeInfoDecorator(new CircleShape(center, radius));
         }
 
         public void WriteResults(List<IShape> shapes)
@@ -95,9 +96,8 @@ namespace lab1.File
 
                 foreach (IShape shape in shapes)
                 {
-                    ShapeInfoDecorator shapeDecorator = new(shape);
-                    shapeDecorator.CalculatePerimeter();
-                    shapeDecorator.CalculateArea();
+                    shape.CalculatePerimeter();
+                    shape.CalculateArea();
                 }
             }
             catch (Exception ex)
