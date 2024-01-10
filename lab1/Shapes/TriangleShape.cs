@@ -2,21 +2,21 @@
 {
     public class TriangleShape : IShape
     {
-        private readonly Point[] points;
+        private readonly Point[] _points;
 
         public TriangleShape(Point[] points)
         {
             if (points.Length != 3)
                 throw new ArgumentException("A triangle must have exactly 3 points.");
 
-            this.points = points;
+            this._points = points;
         }
 
         public double CalculatePerimeter()
         {
-            double side1 = Distance(points[0], points[1]);
-            double side2 = Distance(points[1], points[2]);
-            double side3 = Distance(points[2], points[0]);
+            double side1 = Distance(_points[0], _points[1]);
+            double side2 = Distance(_points[1], _points[2]);
+            double side3 = Distance(_points[2], _points[0]);
 
             return side1 + side2 + side3;
         }
@@ -24,14 +24,14 @@
         public double CalculateArea()
         {
             double semiPerimeter = CalculatePerimeter() / 2;
-            double side1 = Distance(points[0], points[1]);
-            double side2 = Distance(points[1], points[2]);
-            double side3 = Distance(points[2], points[0]);
+            double side1 = Distance(_points[0], _points[1]);
+            double side2 = Distance(_points[1], _points[2]);
+            double side3 = Distance(_points[2], _points[0]);
 
             return Math.Sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
         }
 
-        public void Draw(Graphics graphics) => graphics.DrawPolygon(Pens.Black, points);
+        public void Draw(Graphics graphics) => graphics.DrawPolygon(Pens.Black, _points);
 
         private double Distance(Point p1, Point p2)
         {

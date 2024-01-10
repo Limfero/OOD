@@ -2,19 +2,19 @@
 {
     public class CircleShape : IShape
     {
-        private readonly Point center;
-        private readonly int radius;
+        private readonly Point _center;
+        private readonly int _radius;
 
         public CircleShape(Point center, int radius)
         {
-            this.center = center;
-            this.radius = radius;
+            this._center = center;
+            this._radius = radius;
         }
 
-        public double CalculatePerimeter() => 2 * Math.PI * radius;
+        public double CalculatePerimeter() => 2 * Math.PI * _radius;
 
-        public double CalculateArea() => Math.PI * radius * radius;
+        public double CalculateArea() => Math.PI * _radius * _radius;
 
-        public void Draw(Graphics graphics) => graphics.DrawEllipse(Pens.Black, center.X - radius, center.Y - radius, 2 * radius, 2 * radius);
+        public void Draw(Graphics graphics) => graphics.DrawEllipse(Pens.Black, _center.X - _radius, _center.Y - _radius, 2 * _radius, 2 * _radius);
     }
 }
