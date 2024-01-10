@@ -58,7 +58,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new ShapeInfoDecorator(new TriangleShape(points));
+            return new TriangleShape(points);
         }
 
         private IShape ParseRectangle(string data)
@@ -72,7 +72,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new ShapeInfoDecorator(new RectangleShape(points));
+            return new RectangleShape(points);
         }
 
         private IShape ParseCircle(string data)
@@ -82,7 +82,7 @@ namespace lab1.File
             Point center = new(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             int radius = int.Parse(parameters[1].Split('=')[1]);
 
-            return new ShapeInfoDecorator(new CircleShape(center, radius));
+            return new CircleShape(center, radius);
         }
 
         public void WriteResults(List<IShape> shapes)
@@ -95,8 +95,9 @@ namespace lab1.File
 
                 foreach (IShape shape in shapes)
                 {
-                    shape.CalculatePerimeter();
-                    shape.CalculateArea();
+                    ShapeInfoDecorator shapeDecorator = new(shape);
+                    shapeDecorator.CalculatePerimeter();
+                    shapeDecorator.CalculateArea();
                 }
             }
             catch (Exception ex)
