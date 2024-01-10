@@ -15,7 +15,6 @@ namespace lab1
         {
             InitializeComponent();
             btnLoad.Click += BtnLoadClick;
-            btnSave.Click += BtnSaveClick;
         }
 
         private void BtnLoadClick(object sender, EventArgs eventArgs)
@@ -30,6 +29,8 @@ namespace lab1
                 string filePath = openFileDialog.FileName;
                 FileProcessor fileProcessor = new();
                 shapes = fileProcessor.ReadShapes(filePath);
+
+                fileProcessor.WriteResults(shapes);
             }
 
             if (shapes != null)
@@ -44,26 +45,6 @@ namespace lab1
                 }
             }
             else MessageBox.Show(_warningNoShapes, _captionWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void BtnSaveClick(object sender, EventArgs eventArgs)
-        {
-            if (shapes != null)
-            {
-                SaveFileDialog saveFileDialog = new()
-                {
-                    Filter = _textInFileDialog
-                };
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string filePath = saveFileDialog.FileName;
-                    FileProcessor fileProcessor = new();
-                    fileProcessor.WriteResults(filePath, shapes);
-                }
-            }
-            else MessageBox.Show(_warningNoShapes, _captionWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
         }
     }
 }

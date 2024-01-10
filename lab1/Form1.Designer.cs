@@ -8,7 +8,6 @@
         private System.ComponentModel.IContainer components = null;
 
         private Button btnLoad;
-        private Button btnSave;
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -32,11 +31,9 @@
         private void InitializeComponent()
         {
             this.btnLoad = new Button { Location = new System.Drawing.Point(12, 12), Name = "BtnLoad", Size = new System.Drawing.Size(75, 23), Text = "Load", UseVisualStyleBackColor = true };
-            this.btnSave = new Button { Location = new System.Drawing.Point(93, 12), Name = "BtnSave", Size = new System.Drawing.Size(75, 23), Text = "Save", UseVisualStyleBackColor = true };
 
             this.SuspendLayout();
 
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnLoad);
 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

@@ -4,6 +4,8 @@ namespace lab1.File
 {
     public class FileProcessor
     {
+        private readonly string _outputFilePath = "output.txt";
+
         public List<IShape> ReadShapes(string filePath)
         {
             List<IShape> shapes = new();
@@ -56,7 +58,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new TriangleShape(points);
+            return new ShapeInfoDecorator(new TriangleShape(points));
         }
 
         private IShape ParseRectangle(string data)
@@ -70,7 +72,7 @@ namespace lab1.File
                 points[i] = new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             }
 
-            return new RectangleShape(points);
+            return new ShapeInfoDecorator(new RectangleShape(points));
         }
 
         private IShape ParseCircle(string data)
@@ -80,20 +82,21 @@ namespace lab1.File
             Point center = new(int.Parse(coordinates[0]), int.Parse(coordinates[1]));
             int radius = int.Parse(parameters[1].Split('=')[1]);
 
-            return new CircleShape(center, radius);
+            return new ShapeInfoDecorator(new CircleShape(center, radius));
         }
 
-        public void WriteResults(string filePath, List<IShape> shapes)
+        public void WriteResults(List<IShape> shapes)
         {
             try
             {
-                using StreamWriter writer = new(filePath);
+                using StreamWriter writer = new(_outputFilePath);
+                writer.WriteLine($"Result:\n");
+                writer.Close();
 
                 foreach (IShape shape in shapes)
                 {
-                    double perimeter = shape.CalculatePerimeter();
-                    double area = shape.CalculateArea();
-                    writer.WriteLine($"{shape.GetType().Name}: P={perimeter}; S={area}");
+                    shape.CalculatePerimeter();
+                    shape.CalculateArea();
                 }
             }
             catch (Exception ex)
