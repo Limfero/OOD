@@ -90,7 +90,7 @@ namespace lab1.File
             try
             {
                 using StreamWriter writer = new(_outputFilePath);
-                writer.WriteLine($"Result:\n");
+                writer.WriteLine($"Result:");
                 writer.Close();
 
                 foreach (IShape shape in shapes)
